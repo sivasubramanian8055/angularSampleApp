@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="container d-flex justify-content-center mt-5">
+    <div class="col-sm-8 ml-auto mr-auto">
+      <ul class="nav nav-pills nav-fill mb-0" id="pills-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" id="pills-signin-tab" data-toggle="pill" href="#pills-signin" role="tab" aria-controls="pills-signin" aria-selected="true" #myDiv>Sign In</a> </li>
+        <li class="nav-item"> <a class="nav-link" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Sign Up</a> </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
+          <div class="col-sm-12 border border-warning shadow rounded pt-2">
+            <form method="post" id="singninFrom">
+              <div class="form-group p-2">
+                <label class="font-weight-bold">Username <span class="text-danger">*</span></label>
+                <input [(ngModel)]="userName" type="Username" name="Username" id="Username" class="form-control" placeholder="Enter valid Username" required>
+              </div>
+              <div class="form-group p-2">
+                <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
+                <input [(ngModel)]="password" type="password" name="password" id="password" class="form-control" placeholder="***********" required>
+              </div>
+              <!-- <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <label><input type="checkbox" name="condition" id="condition"> Remember me.</label>
+                  </div>
+                  <div class="col text-right"> <a href="javascript:;" data-toggle="modal" data-target="#forgotPass">Forgot Password?</a> </div>
+                </div>
+              </div> -->
+              <div class="form-group p-2">
+                <input type="submit" name="submit" (click)="validateUser()" value="Sign In" class="btn btn-block btn-warning">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+          <div class="col-sm-12 border border-warning shadow rounded pt-2">
+            <form method="post" id="singnupFrom">
+                <div class="form-group p-2">
+                  <label class="font-weight-bold">User Name <span class="text-danger">*</span></label>
+                  <input [(ngModel)]="signUpUsername" type="text" name="signupusername" id="signupusername" class="form-control" placeholder="Choose your user name" required>
+                  <div *ngIf='duplicateUser' class="text-danger"><em>Username Already Exist</em></div>
+                </div>
+              <div class="form-group p-2">
+                <label class="font-weight-bold">Email <span class="text-danger">*</span></label>
+                <input [(ngModel)]="signUpEmail" type="email" name="signupemail" id="signupemail" class="form-control" placeholder="Enter valid email" required>
+              </div>
+              <div class="form-group p-2">
+                <label class="font-weight-bold">Phone #</label>
+                <input [(ngModel)]="signUpPhoneNumber" type="text" name="signupphone" id="signupphone" class="form-control" placeholder="(000)-(0000000)">
+              </div>
+              <div class="form-group p-2">
+                <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
+                <input [(ngModel)]="signUpPassword" type="password" name="signuppassword" id="signuppassword" class="form-control" placeholder="***********" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
+                  required>
+              </div>
+              <div class="form-group p-2">
+                <input (click)="addNewUser()" name="signupsubmit" value="Sign Up" class="btn btn-block btn-warning">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

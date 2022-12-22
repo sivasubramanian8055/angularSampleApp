@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div class="container d-flex flex-column">
+  <div class="display-6 mt-3 mb-3">
+    Shopping Cart
+  </div>
+  <div *ngIf="isPizzaCartEmpty()" style="margin-top:100px;" class="display-4 d-flex justify-content-center">Cart Feels
+    Lonely without Pizzas!!</div>
+  <div class="container d-flex row" style="width: 90rem;" *ngIf="!isPizzaCartEmpty()">
+    <div *ngFor="let pizza of shopingCartDetails;let i = index">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{pizza.image}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{pizza.pizzaName}}</h5>
+              <p class="card-text">{{pizza.description}}</p>
+              <div class="d-flex align-items-baseline">
+                <b>Toppings</b>
+                <div class="mx-4">{{toppingsOfPizza[i]}}</div>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <b>Cost</b>
+                <div class="mx-4">{{costOfEveryPizza[i]}}₹</div>
+              </div>
+              <p class="card-text d-flex flex-row"><small>quantity<div class="text-muted">X{{pizza.quantity}}</div>
+                  </small></p>
+              <div class="d-flex">
+                <input type="number" class="form-control" id="pizza.id" placeholder="quantity" style="width: 100px;"
+                  (change)="quantityOnChange($event,i,pizza.id)" value="parseInt(pizza.quantity)">
+                <a href="javascript:;" class="btn btn-danger mx-1" (click)="removeFromCart(pizza.id)">Remove from
+                  Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Checkout Details
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Total Cost (inclusive of gst)</h5>
+        <p class="card-text">{{getCartCost()}}₹</p>
+        <a href="#" class="btn btn-warning" (click)="onCheckoutClick()">Go To Payment Gateway</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

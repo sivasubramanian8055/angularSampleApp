@@ -1,0 +1,25 @@
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home" routerLinkActive="active-class">PIZZERIA</a>
+      <div class="navbar-brand"><img src="../assets/PizzeriaLogo.png" width="60" height="40"></div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/orderPizza" routerLinkActive="active-class">Order Pizza</a>
+          </li>
+        </ul>
+        <form class="d-flex align-items-center">
+          <div class="display-7" *ngIf="isUserLoggedIn" style="color:#ffc107;">Welcome {{loggedInUser}}</div>
+          <button class="btn btn-warning mx-3" type="button"  routerLink="/shopingCart" routerLinkActive="active-class">
+            Shoping Cart<i class="fa-solid fa-cart-shopping mx-2"></i>
+          </button>
+          <button *ngIf="!isUserLoggedIn" class="btn btn-outline-warning" type="button"  routerLink="/login" routerLinkActive="active-class">Login / Register</button>
+          <button *ngIf="isUserLoggedIn" class="btn btn-outline-warning" type="button" (click)="userLogout()">Logout</button>
+        </form>
+      </div>
+    </div>
+  </nav>

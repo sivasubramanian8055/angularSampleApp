@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="container d-flex flex-column">
+  <div class="display-6 mt-3 mb-3">
+    À la carte
+  </div>
+  <div class="container d-flex row justify-content-center" style="width: 90rem;">
+    <div class="card m-3 d-flex col-md-4" *ngFor="let pizza of menuInfo;let i = index">
+      <img class="card-img-top" src="{{pizza.image}}" alt="Card image cap" height="270">
+      <div class="card-body">
+        <div style="height: 22rem;">
+          <div class="d-flex align-items-center">
+            <h5 class="card-title mx-1">{{pizza.name}}</h5>
+            <img *ngIf="pizza.type==='veg'" src="../../assets/veg.png" height="20" width="20">
+            <img *ngIf="pizza.type==='nonveg'" src="../../assets/download.jpg" height="20" width="20">
+          </div>
+          <p class="card-text">{{pizza.description}}</p>
+          <div class="d-flex align-items-baseline">
+            <b>Ingridients</b>
+            <div class="mx-2">{{pizza.ingredients}}</div>
+          </div>
+          <div class="d-flex align-items-baseline">
+            <b>Toppings</b>
+            <div class="mx-4">{{pizza.topping}}</div>
+          </div>
+        </div>
+        <div class="d-flex">
+          <input type="number" *ngIf="!isPizzaInCart(pizza.id)" class="form-control" id="input1" placeholder="quantity"
+            style="width: 100px;" (change)="quantityOnChange($event,i)" value=1>
+          <a href="javascript:;" class="btn btn-danger mx-1" *ngIf="isPizzaInCart(pizza.id)"
+            (click)="removeFromCart(pizza.id)">Remove from Cart</a>
+          <a href="javascript:;" class="btn btn-warning mx-1" data-toggle="modal" *ngIf="!isPizzaInCart(pizza.id)"
+            data-target="#forgotPass" (click)="onCustomizationClick(pizza.name)">customize & Add To Cart <i
+              class="fa-solid fa-cart-arrow-down my-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="forgotPass" tabindex="-1" role="dialog" aria-hidden="true" *ngIf="modalOpen">
+    <div class="modal-dialog" role="document">
+      <form>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Choose Extra addons</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()"> <span
+                aria-hidden="true">&times;</span> </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let addOn of ingridientInfo;let indexOfelement=index;">
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                  <img src="{{addOn.image}}" height="40" width="40">
+                  <label class="custom-control-label" for="check1">{{addOn.tname}}</label>
+                  <div>{{addOn.price}} ₹</div>
+                  <input type="checkbox" class="custom-control-input" id="{{addOn.id}}"
+                    (click)="onToppingClick($event,indexOfelement)">
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" name="forgotPass" class="btn btn-warning" data-dismiss="modal"
+              (click)="addToCart()">Done</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
